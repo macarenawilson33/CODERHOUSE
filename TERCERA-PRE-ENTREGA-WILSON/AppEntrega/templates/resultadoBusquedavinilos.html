@@ -1,0 +1,28 @@
+{% extends 'padre.html' %}
+
+{% block content %}
+  
+<p>Buscamos los Vinilos del artista o banda {{Autor}}</p>
+
+{% if vinilo %}
+
+<ul>
+  {% for Vinilo in vinilo %}
+    
+    <li>
+      {{Vinilo.nombre}} - {{Vinilo.artista}} 
+    </li>
+      
+  {% endfor %}
+
+</ul>
+
+{% else %}
+
+  <p>No hubo coincidencias!</p>
+
+{% endif %}
+
+
+  
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'padre.html' %}
+
+{% block content %}
+  
+<h1 style="color:cadetblue">Formulario: Agrega un Vinilo</h1>
+
+<form action="{% url 'VinilosFormulario' %}" method="post">{% csrf_token %}
+
+  <table>
+
+  {{miFormulario.as_p}}
+
+  </table>
+
+  <button type="submit"> Agregar </button>
+
+</form>
+
+{% endblock content %}
+  

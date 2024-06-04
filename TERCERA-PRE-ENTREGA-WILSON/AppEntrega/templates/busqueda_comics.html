@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+
+{% block content %}
+  
+<form action="{% url 'BuscarComics' %}" method="get">
+
+  <p>Nombre del Autor <input type="text"  name="Autor"></p>
+
+  <button type="submit"> Buscar </button>
+
+</form>
+
+{% endblock content %}
+  

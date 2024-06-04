@@ -1,0 +1,29 @@
+{% extends 'padre.html' %}
+
+{% block content %}
+  
+<p>Buscamos los Libros de {{Autor}}</p>
+
+{% if libro %}
+
+<ul>
+  {% for Libro in libro %}
+    
+    <li>
+      {{Libro.nombre}} - {{Libro.AutorLibro}} 
+    </li>
+      
+  {% endfor %}
+
+</ul>
+
+{% else %}
+
+  <p>No hubo coincidencias!</p>
+
+{% endif %}
+
+
+  
+{% endblock content %}
+  

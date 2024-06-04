@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+
+{% block content %}
+  
+<form action="{% url 'BuscarVinilos' %}" method="get">
+
+  <p>Nombre de la Banda o Artista <input type="text"  name="Artista"></p>
+
+  <button type="submit"> Buscar </button>
+
+</form>
+
+{% endblock content %}
+  

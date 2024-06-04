@@ -1,0 +1,20 @@
+{% extends 'padre.html' %}
+
+
+{% block content %}
+  
+  <h1>Compra o Vende tu Vinilo</h1>
+
+  <div style="display: flex; column-gap: 5px;">
+    <button>
+      <a href="{% url 'VinilosFormulario' %}"> Agrega un Libro </a>
+    </button>
+    <button>
+      <a href="{% url 'BusquedaVinilos' %}"> Busca un Libro </a>
+    </button>
+  </div>
+
+  <p>{{message}}</p>
+
+{% endblock content %}
+  
