@@ -1,0 +1,46 @@
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="{% url 'home' %}">Macus Shop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tienda</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'category' 'TODOS' %}">Todos los productos</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'category' 'LIBRO' %}">Libros</a></li>
+                                <li><a class="dropdown-item" href="{% url 'category' 'VINILO' %}">Vinilos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'category' 'COMIC' %}">Comics</a></li>
+                            </ul>
+                        </li>
+                        {% if not user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Acceder</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registarse</a></li>
+                        {% else %}
+                        {% if user.is_staff %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'new_product' %}">Alta Productos</a></li>
+                        {% endif %}                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cuenta</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'update_user' %}">Editar Perfil</a></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Salir</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                    </ul>
+
+                    <form class="d-flex">
+                        <a href="{% url 'checkout' %}" class="btn btn-outline-dark"> <!-- no se porque no toma este path de manera dinamica-->
+                            <i class="bi-cart-fill me-1"></i>
+                            Carrito
+                            <span id="cart_qty" class="badge bg-dark text-white ms-1 rounded-pill"> {{ cart|length}}</span>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </nav>

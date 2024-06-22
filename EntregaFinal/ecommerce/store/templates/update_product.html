@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Actualizar Producto</h1>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <center>
+                <br>
+                <br>
+                <form method="POST" action=" {% url 'update_product' product.id %} " enctype=multipart/form-data >
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-secondary">Actualizar</button>
+                <br><br>
+                </form>
+                <br>
+                <br>
+            </center>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

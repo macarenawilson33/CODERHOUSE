@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Carrito</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Resumen de productos</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+    <div class="container">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-8 cart">
+                    <div class="title">
+                        <div class="row">
+                            <br>
+                            <div class="col"><h4><b>Carrito</b></h4></div>
+                            <br>
+                            <div class="col align-self-center text-right text-muted"> {{ cart_qty }} </div>
+                        </div>
+                    </div>
+                    {% if cart_qty != 0 %}
+                    {% for product in products %}
+                    <div class="row">
+                        <div class="row main align-items-center">
+                            <div class="col-2"><img class="img-fluid" src="{{ product.image.url }}"></div>
+                            <div class="col">
+                                <div class="row text-muted">{{ product.name }}</div>
+                                <div class="row">{{ product.name }}</div>
+                            </div>
+                            <div class="col">
+                                <br>
+                            </div>
+                            <div class="col">$ {{ product.price }}</div>
+                            <div class="col"><button type="button" data-index="{{ product.id }}" class="btn btn-danger" id="delete-product">x</button></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="row">
+                        <div class="row main align-items-center">
+                            <div class="col"></div>
+                            <div class="col">El Carrito Esta Vacio</div>
+                            <div class="col"></div>
+                        </div>
+                    </div>                
+                    {% endif %}
+                    <br><br>
+                    <div class="back-to-shop"><a href="{% url 'category' 'TODOS' %}">&leftarrow;</a><span class="text-muted">Volver al shop</span></div>
+                </div>
+                <div class="col-md-4 summary">
+                    <div><h5><b>Resumen</b></h5></div>
+                    <hr>
+                    <div class="row">
+                        <div class="col" style="padding-left:0;">Productos {{ cart_qty }} </div>
+                        <div class="col text-right">${{ total_in_cart }} </div>
+                    </div>
+                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                        <div class="col">Precio Total</div>
+                        <div class="col text-right">${{ total_in_cart }}</div>
+                    </div>
+                    <button class="btn">Finalizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+<script>
+    $(document).on('click','#delete-product', function(e){
+        e.preventDefault();
+        var productid = $(this).data('index');
+        $.ajax(
+            { 
+            type:'POST',
+            url: '{% url 'cart_delete' %}',
+            data: {
+                product_id: productid,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            }
+            ,
+            success: function(json){
+                location.reload()
+            },
+
+            error: function (xhr, errmsg, err){
+                
+            }
+            }            
+        )
+    })
+</script>
+ {% endblock %}
